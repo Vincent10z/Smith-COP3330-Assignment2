@@ -1,5 +1,5 @@
 package ex39;
-
+import java.util.Comparator;
 public class Company {
     String fName;
     String lname;
@@ -43,6 +43,4 @@ public class Company {
     public void setSepDate(String sepDate) {
         this.sepDate = sepDate;
     }
-
-}
 

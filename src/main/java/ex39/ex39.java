@@ -8,30 +8,58 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class ex39 {
-    public static void main(String[] args) {
 
-        List<Company> list = new ArrayList<>();
-        list.add(new Company("John", "Johnson", "Manager", "2016-12-31"));
-        list.add(new Company("Tou", "Xiong", "Software Engineer", "2016-10-05"));
-        list.add(new Company("Michaela", "Michaelson", "District Manager", "2015-12-19"));
-        list.add(new Company("Jake", "Jacobson", "Programmer", " "));
-        list.add(new Company("Jacquelyn", "Jackson", "DBA", " "));
-        list.add(new Company("Sally", "Webber", "Web Developer", "2015-12-18"));
 
-        // key = id, value - websites
-        Map<String, Name> result1 = Name.stream(
-                Collectors.toMap(Company::getfName));
+        Scanner in = new Scanner(System.in);
 
-        System.out.println("Result 1 : " + result1);
-
-        // key = name, value - websites
-        Map<String, Name> result2 = list.stream().collect(
-                Collectors.toMap(Company::getPosition, Company::getSepDate));
-
-        System.out.println("Result 2 : " + result2);
+        public static void main(String[] args) {
+            ex39 app = new ex39();
+            List<Company> list = app.getlist();
+            app.pList(list);
+            String sortMethod = app.howToSort();
+            List<Company> sortedlist = app.getSortList(list, sortMethod);
+            app.pList(sortedlist);
+        }
 
 
 
+    public List<Company> getlist(){
+        Company[] companies = {
+        new Company("John", "Johnson", "Manager", "2016-12-31");
+        new Company("Tou", "Xiong", "Software Engineer", "2016-10-05");
+        new Company("Michaela", "Michaelson", "District Manager", "2015-12-19");
+        new Company("Jake", "Jacobson", "Programmer", " ");
+        new Company("Jacquelyn", "Jackson", "DBA", " ");
+        new Company("Sally", "Webber", "Web Developer", "2015-12-18");
+
+        }
+        return Arrays.asList(companies);
+
+    }
+    public void pList(List<Company> pList){
+        System.out.printf("Name %18s Position %10sSeparation Date\n", "|", "|");
+        System.out.println("----------------------|-------------------|------------------");
+        pList().forEach(System.out::println);
+    }
+    public String howToSort() {
+        System.out.print("\nHow would you like to sort by?\n-FirstName\n-LastName\n-Position\n-SeparationDate\ninput: ");
+        return in.next();
+    }
+    public List<Company> getSortList(List<Company> list, String sort) {
+        if(sort.equalsIgnoreCase("FirstName")){
+            list.sort(new Company.firstNameSorter());
+        }
+        if(sort.equalsIgnoreCase("LastName")){
+            list.sort(new Company.lastNameSorter()));
+        }
+        if(sort.equalsIgnoreCase("Position")){
+            list.sort(new Company.positionSorter());
+        }
+        if(sort.equalsIgnoreCase("SeparationDate")){
+            list.sort(new Company.positionSorter.separationDateSorter());
+        }
+        return list;
+    }
 
     }
 
